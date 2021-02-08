@@ -1,0 +1,20 @@
+# настройка веб сервера apache
+
+# Все данные мы будем обрабатывать внутри кода поэтому что бы не было двойной обработки кода отключаем экранирования
+# функцией magic_qoutes_gpc Off
+php_flag magic_qoutes_gpc Off
+
+addDefaultCharSet utf-8
+
+DirectoryIndex index.php
+
+
+# Включение mod_rewrite для перенапревления запросов в одну точку в нашем случае в точку index.php
+RewriteEngine on
+
+# Указанаие условия для mod_rewrite
+# Если то что запросил пользователь не является файлом (!-f означает не файл)
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# То перенаправить пользователя на index.php лежащий в корне нашего сайта (^(.*))
+RewriteRule ^(.*) index.php
