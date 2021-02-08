@@ -4,6 +4,7 @@
 # функцией magic_qoutes_gpc Off
 php_flag magic_qoutes_gpc Off
 
+# В какой кодировке сервер будет обрабатывать данные
 addDefaultCharSet utf-8
 
 DirectoryIndex index.php
