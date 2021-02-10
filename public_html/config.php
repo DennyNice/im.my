@@ -4,6 +4,7 @@
 defined('VG_ACCESS') or die("Access denied");
 
 # Адресс сайта
+# Все 6 настроек уникальны для каждого хостинга
 const SITE_URL = "http://im.my";
 # Корень пути нашего сайта
 const PATH = "/";
