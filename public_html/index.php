@@ -12,6 +12,22 @@ session_start();
 # В config.php будут хранится базовые настройки необходимые для быстрого развертывания сайта на хостинге
 require_once "config.php";
 
-//TODO add internal_settings.php
 # В internal_settings.php будут хранится более фундаментальные настройки например: пути к шаблонам, настройки безапасности сайта
 require_once "core/base/settings/internal_settings.php";
+
+# Импортируем пространство имен
+use core\base\exceptions\RouteException;
+use core\base\controllers\RouteController;
+
+# Через метод RouteController будет работать весь проект и вся система маршрутов
+try {
+    # :: это вызов статического метода из класса RouteController
+    RouteController::getInstance()->route();
+
+} catch (RouteException $e) {
+    exit($e->getMessage());
+
+}
+
+
+

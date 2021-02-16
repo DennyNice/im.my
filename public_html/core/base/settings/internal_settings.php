@@ -6,7 +6,7 @@ defined("VG_ACCESS") or die("Access denied");
 const TEMPLATE = "templates/default/";
 
 # В этой константе будут хранится шаблоны административной панели (админки) нашего сайта
-const ADMIN_TEMPLATES = "core/admin/views";
+const ADMIN_TEMPLATE = "core/admin/views";
 
 # Эта константа отвечает за безопасность
 # Нужна она для того что бы мы могли заставить пользователей специально перелогинится на наш сайт путем замены версии cookie файла
@@ -39,4 +39,23 @@ const USER_CSS_JS = [
     "styles" => [],
     "scripts" => []
 ];
+
+# Импортируем пространство имен
+use core\base\exceptions\RouteException;
+
+# Функция для загрузчика spl_autoload_register в него передаем название нашей функции (autoloadMainCLasses)
+function autoloadMainCLasses($class_name)
+{
+    # Происходит экранирование строк для того что бы php смог отсканировать нужный путь в директориях
+    $class_name = str_replace("\\", "/", $class_name);
+
+    # @ это знак перед include_once блокирует вывод в браузере ошибок и warnings
+    if (@!include_once $class_name . ".php") {
+        throw new RouteException("Не верное имя файла для подключения - " . $class_name);
+    }
+}
+
+# Загрузчик классов spl_autoload_register (он всегда регистрирует очередь какая функция стоит раньше та и будет первой)
+spl_autoload_register("autoloadMainCLasses");
+
 
