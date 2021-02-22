@@ -22,7 +22,8 @@ use core\base\controllers\RouteController;
 # Через метод RouteController будет работать весь проект и вся система маршрутов
 try {
     # :: это вызов статического метода из класса RouteController
-    RouteController::getInstance()->route();
+   // RouteController::getInstance()->route();
+    RouteController::getInstance();
 
 } catch (RouteException $e) {
     exit($e->getMessage());
